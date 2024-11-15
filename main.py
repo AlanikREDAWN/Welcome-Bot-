@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import time
 import os
 from slack_bolt.adapter.socket_mode import SocketModeHandler
+from flask import Flask, request, jsonify
+from slack_bolt.adapter.vercel import VercelRequestHandler
 
 load_dotenv()
 
@@ -360,6 +362,24 @@ def first_button(client, event, logger, body, ack):
 
    
 
-# Ready? Start your app!
-if __name__ == "__main__":
-   app.start(port=int(os.environ.get("PORT", 3000)))
+# # Ready? Start your app!
+# if __name__ == "__main__":
+#    app.start(port=int(os.environ.get("PORT", 3000)))
+
+# Setup Vercel handler
+flask_app = Flask(__name__)
+handler = VercelRequestHandler(app)
+
+@flask_app.route("/api/slack", methods=["POST"])
+def slack_events():
+    # Handle Slack's URL verification challenge
+    if request.json.get("type") == "url_verification":
+        challenge = request.json.get("challenge")
+        return jsonify({"challenge": challenge})
+    
+    # Process Slack events
+    return handler.handle(request)
+
+# For Vercel, we expose the Flask app
+def app(event, context):
+    return flask_app(event, context)
