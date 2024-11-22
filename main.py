@@ -3,6 +3,7 @@ from slack_bolt import App
 from dotenv import load_dotenv
 import time
 import os
+from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 load_dotenv()
 
@@ -10,7 +11,7 @@ load_dotenv()
 # Initialize your app with your bot token and signing secret
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
-    signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
+  signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
 )
 
 @app.command("/hello-world-lilia1")
@@ -131,10 +132,11 @@ def member_joined_channel(client, event, logger, body, ack, say):
             link_names=True
         )
         print(result)
-
         global ts
-        ts = result["ts"]
+
+        ts = result["ts"] 
         
+
         print(ts)
         client.chat_postMessage(
            channel="C07MYBDLBGU",
@@ -170,7 +172,7 @@ def member_joined_channel(client, event, logger, body, ack, say):
         #    blocks=message_blocks1
         # )
     except Exception as e:
-        logger.error(f"Error publishing home tab: {e}")
+        logger.error(f"Error with member_joined_channel: {e}")
 
 # @app.event("member_joined_channel")
 # def member_joined_channel(client, event, logger, ack):
@@ -185,7 +187,7 @@ def member_joined_channel(client, event, logger, body, ack, say):
 #         logger.error(f"Error in 'member_joined_channel' handler: {e}")
 
 @app.action("actionId-0")
-def second_button(client, event, logger, body, ack):
+def first_button(client, event, logger, body, ack):
     ack()
     try:
       message_blocks2 = [
@@ -220,11 +222,11 @@ def second_button(client, event, logger, body, ack):
           blocks=message_blocks2
       )
     except Exception as e:
-        logger.error(f"Error publishing home tab: {e}")
+        logger.error(f"Error with first button: {e}")
 
 
 @app.action("actionId-1")
-def first_button(client, event, logger, body, ack):
+def second_button(client, event, logger, body, ack):
     ack()
     try:
       message_blocks3 = [
@@ -268,10 +270,10 @@ def first_button(client, event, logger, body, ack):
       )
 
     except Exception as e:
-        logger.error(f"Error publishing home tab: {e}")
+        logger.error(f"Error with second button: {e}")
 
 @app.action("actionId-2")
-def first_button(client, event, logger, body, ack):
+def third_button(client, event, logger, body, ack):
     ack()
     try:
       message_blocks4 = [
@@ -323,7 +325,7 @@ def first_button(client, event, logger, body, ack):
         )
 
     except Exception as e:
-        logger.error(f"Error publishing home tab: {e}")
+        logger.error(f"Error with third button: {e}")
     # channel_name = "kittycats-cattery"
     # conversation_id = None
     # try:
@@ -360,6 +362,8 @@ def first_button(client, event, logger, body, ack):
    
 
 # Ready? Start your app!
-if __name__ == "__main__":
-   app.start(port=int(os.environ.get("PORT", 3000)))
+# if __name__ == "__main__":
+#    app.start(port=int(os.environ.get("PORT", 3000)))
 
+if __name__ == "__main__":
+  SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
