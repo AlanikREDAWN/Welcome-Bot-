@@ -190,6 +190,47 @@ def member_joined_channel(client, event, logger, body, ack, say):
 def first_button(client, event, logger, body, ack):
     ack()
     try:
+      userInfo = client.users_info(
+        user=event["user"]
+      )
+      message_blocks_edited = [
+        {
+          "type": "section",
+          "text": {
+            "type": "plain_text",
+            "text": "KittyCat also had a pet bird named Oly, in case you were wondering"
+          }
+        },
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "<@{event['user']}> "
+                },
+                {
+                  "type": "text",
+                  "text": "pressed ",
+                  "style": {
+                    "italic": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "Hello! Nice to meet you!",
+                  "style": {
+                    "bold": true,
+                    "italic": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
       message_blocks2 = [
         {
           "type": "section",
@@ -213,6 +254,14 @@ def first_button(client, event, logger, body, ack):
           ]
         }
       ]
+      client.chat_update(
+        channel="C07MYBDLBGU",
+        text="KittyCat also had a pet bird named Oly, in case you were wondering",
+        username="Alex",
+        icon_url="https://cloud-7tyr8vl40-hack-club-bot.vercel.app/0img_4717.jpeg",
+        thread_ts=ts,
+        blocks=message_blocks_edited
+      )
       client.chat_postMessage(
           channel="C07MYBDLBGU",
           text="We're so happy you joined the cattery, we love having new faces. Would you like to get to know us better?",
@@ -229,6 +278,44 @@ def first_button(client, event, logger, body, ack):
 def second_button(client, event, logger, body, ack):
     ack()
     try:
+      message_blocks2_edited = [
+        {
+          "type": "section",
+          "text": {
+            "type": "plain_text",
+            "text": "We're so happy you joined the cattery, we love having new faces. Would you like to get to know us better?"
+          }
+        },
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "<@{event['user']}> "
+                },
+                {
+                  "type": "text",
+                  "text": "pressed ",
+                  "style": {
+                    "italic": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "Sure!",
+                  "style": {
+                    "bold": true,
+                    "italic": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
       message_blocks3 = [
         {
           "type": "section",
@@ -252,6 +339,14 @@ def second_button(client, event, logger, body, ack):
           ]
         }
       ]
+      client.chat_update(
+         channel="C07MYBDLBGU",
+         text="We're so happy you joined the cattery, we love having new faces. Would you like to get to know us better?",
+          username="Alex",
+          icon_url="https://cloud-7tyr8vl40-hack-club-bot.vercel.app/0img_4717.jpeg",
+          thread_ts=ts,
+          blocks=message_blocks2_edited
+      )
       client.chat_postMessage(
            channel="C07MYBDLBGU",
            text="Okay then! As for breed, we're cornish rex cats, a very playful breed",
@@ -276,6 +371,44 @@ def second_button(client, event, logger, body, ack):
 def third_button(client, event, logger, body, ack):
     ack()
     try:
+      message_blocks3_edited = [
+        {
+          "type": "section",
+          "text": {
+            "type": "plain_text",
+            "text": "Yeah! We even have our own treadmill, and plently of toys, but my favorite is the food. What about you, Carly?... Carly? Carly? Oh, great, she's doing it again"
+          }
+        },
+        {
+          "type": "rich_text",
+          "elements": [
+            {
+              "type": "rich_text_section",
+              "elements": [
+                {
+                  "type": "text",
+                  "text": "<@{event['user']}> "
+                },
+                {
+                  "type": "text",
+                  "text": "pressed ",
+                  "style": {
+                    "italic": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": "Doing what?",
+                  "style": {
+                    "bold": true,
+                    "italic": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
       message_blocks4 = [
         {
           "type": "section",
@@ -290,6 +423,14 @@ def third_button(client, event, logger, body, ack):
           "alt_text": "Carly staring at the wall"
         }
       ]
+      client.chat_update(
+         channel="C07MYBDLBGU",
+          text="Yeah! We even have our own treadmill, and plently of toys, but my favorite is the food. What about you, Carly?... Carly? Carly? Oh, great, she's doing it again",
+          username="Alex",
+          icon_url="https://cloud-7tyr8vl40-hack-club-bot.vercel.app/0img_4717.jpeg",
+          thread_ts=ts,
+          blocks=message_blocks3_edited
+      )
 
       client.chat_postMessage(
           channel="C07MYBDLBGU",
